@@ -73,7 +73,16 @@ This document aims to present an SN emulation architecture which realizes the re
 
 {::boilerplate bcp14-tagged}
 
+# SN Emulation Architecture
 
+Figure 1 describes the SN emulation architecture which can be divided into four planes, namely logical plane, control plane, data plane, and measurement plane. A particular network scenario is set at logical plane. Corresponding settings are stored in database. Control plane reads these settings and procedures command to drive emulation in data plane. Measurement plane is served to monitor network performances of simulation scenarios.
+
+## Logical Plane
+According to the specific network scenario, a network model could be built by logical plane which includes space-based backbone transmission network, satellite links, space-based access network, ground stations, terrestrial network, and end-users. The network model contains not only parameters of network nodes, but also specific connection plan, channel parameters, software deployments, and network protocols.
+
+## Control Plane 
+Control plane consists of two parts: the front-end service and the back-end service. The front-end service offers aWeb UI to interact with researchers. Researchers can configure various parameters of the network model and visualize the network scenario through the Web UI. The back-end service is backed by the main controller which is responsible for implementing commands and parameters from logical plane into data plane. The main controller is a software and operates all elements in data plane. Researchers can configure and control the environment parameters with different emulation scenarios, as well as monitor the traffic for each testing through control plane. The emulation architecture is thus configurable and controllable.
+ 
 # Security Considerations
 
 TODO Security
