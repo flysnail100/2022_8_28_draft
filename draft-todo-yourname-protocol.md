@@ -55,9 +55,7 @@ informative:
 
 --- abstract
 
-This document describes an emulation architecture which provides a realistic, flexible, and extensible experimental environment for the space network (SN). The architecture includes four components, namely logical plane, control plane, data plane and measurement plane. Software-defined networking (SDN), virtualization technology, and traffic control mechanism are adopted to realize the real space 11
-environment and arbitrary topology. Furthermore, an extensible structure is described to emulate 12
-large-scale scenarios and access external emulation resources.
+This document describes an emulation architecture which provides a realistic, flexible, and extensible experimental environment for the space network (SN). The architecture includes four components, namely logical plane, control plane, data plane and measurement plane. Software-defined networking (SDN), virtualization technology, and traffic control mechanism are adopted to realize the real space environment and arbitrary topology. Furthermore, an extensible structure is described to emulate large-scale scenarios and access external emulation resources.
 
 
 --- middle
