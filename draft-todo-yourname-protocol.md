@@ -23,7 +23,7 @@ title: "An Architecture for Space Network Emulation"
 category: info
 
 docname: draft-hou-yourname-arch-latest
-submissiontype: IETF  # also: "independent", "IAB", or "IRTF"
+submissiontype: IETF
 number:
 date:
 consensus: true
@@ -57,13 +57,12 @@ informative:
 
 This document describes an emulation architecture which provides a realistic, flexible, and extensible experimental environment for the space network (SN). The architecture includes four components, namely logical plane, control plane, data plane and measurement plane. Software-defined networking (SDN), virtualization technology, and traffic control mechanism are adopted to realize the real space environment and arbitrary topology. Furthermore, an extensible structure is described to emulate large-scale scenarios and access external emulation resources.
 
-
 --- middle
 
 # Introduction
 
 TODO Introduction
-
+With the proliferation of low cost spatial information system, powerful on-board processing capacity, and mature inter-satellite link technique, space network (SN) is emerging as an important part of national infrastructure and research frontier. However, due to some unique characteristics of SN, e.g. long propagation delay, frequent link disruption, and etc., mature terrestrial networking technologies cannot be applied to SN directly.
 
 # Conventions and Definitions
 
