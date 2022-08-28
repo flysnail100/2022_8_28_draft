@@ -83,6 +83,26 @@ According to the specific network scenario, a network model could be built by lo
 ## Control Plane 
 Control plane consists of two parts: the front-end service and the back-end service. The front-end service offers aWeb UI to interact with researchers. Researchers can configure various parameters of the network model and visualize the network scenario through the Web UI. The back-end service is backed by the main controller which is responsible for implementing commands and parameters from logical plane into data plane. The main controller is a software and operates all elements in data plane. Researchers can configure and control the environment parameters with different emulation scenarios, as well as monitor the traffic for each testing through control plane. The emulation architecture is thus configurable and controllable.
  
+## Data Plane
+Data plane is served to emulate network scenarios directly, which contains SDN switches, servers, emulation nodes and etc. These underlying network resources are connected with each other in a hierarchical star network structure. Emulation nodes are connected to the virtual switch on the server and represent SN nodes at logical plane. Diverse software and applications are installed in the emulation node. Servers and external devices or networks are linked to each other by the SDN hardware switch.
+
+## Measurement Plane
+Measurement plane mainly has two functions, namely real-time network information collection and full packet capture. The capture container is the basic unit of measurement plane. Each capture container covers a Python-based Daemon which realizes network information collection and supports full packet capture according to the configuration of users. Measurements are stored in database and real-time network information is displayed by the Web UI.
+
+# Physical Implementation Model
+Corresponding to the emulation architecture, a typically physical implementation model is presented which has four principal parts: Web UI, main controller, emulation node and SDN switch, as shown in Figure 2.
+
+## Web UI
+Users interact with the emulation architecture through the Web UI. The Web UI stores network model parameters configured by users into the database, and show network models in real time to make users observe the emulation process intuitively.
+
+## Main Controller
+The main controller interacts with the Web UI and is served for parameter calculation, SDN switch control and node management. The calculation results are written to the database for subsequent emulation operations. The parameter calculation refers to the process that the main controller reads the network model parameters, obtains the relationships of visibility and link characteristics between nodes, filters the connection relationships, and assigns the network configuration of emulation nodes. The SDN switch control refers to the process that the main controller sends topology control flow tables to SDN switches in real time according to the target network topology. The node management refers to the process that the main controller creates emulation nodes, binds nodes with SDN switches, and allocates emulation resources. Besides, the main controller is also responsible for generating the experimental start time and transmitting the operation state of the experiment to the Web UI.
+
+## Emulation Node
+All emulation nodes run real network protocol stacks and applications to complete network traffic exchange. Due to the advantages of flexible configuration, easy extension and convenient management, virtual nodes are generally used to simulate the nodes in the target network. For some special needs or cases where emulation can not be supported by pure virtual nodes, physical nodes are used, including embedded devices, satellite links, and etc.
+
+## SDN Switch
+According to assigned network parameters, each emulation node is linked to corresponding SDN switch by the main controller. SDN software switch is responsible for the connection of virtual nodes. Meanwhile SDN hardware switch is in charge of the connection of physical nodes, and provides access to external networks or links for the emulation architecture. SDN software switch and SDN hardware switch are connected with each other to form an interconnected emulation network. Once the emulation experiment starts, the main controller sends real-time flow tables to each SDN switch to simulate the dynamic topology of the target network model. SDN switches can also collect and send their own states back to the Web UI for displaying, or save these states for subsequent analysis.
 # Security Considerations
 
 TODO Security
