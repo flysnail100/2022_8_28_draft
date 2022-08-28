@@ -55,12 +55,7 @@ informative:
 
 --- abstract
 
-This paper 6
-concentrates on designing an emulation platform which provides a realistic, flexible, and extensible 7
-experimental environment for the SN. The architecture of platform includes four components, namely 8
-logical plane, control plane, data plane and measurement plane. Container technology is adopted to 9
-flexibly symbolize network nodes. The emulation method of dynamic connection relationships and 10
-time-varying link characteristics between pairwise nodes are considered so as to realize the real space 11
+This document describes an emulation architecture which provides a realistic, flexible, and extensible experimental environment for the space network (SN). The architecture includes four components, namely logical plane, control plane, data plane and measurement plane. Software-defined networking (SDN), virtualization technology, and traffic control mechanism are adopted to realize the real space 11
 environment and arbitrary topology. Furthermore, an extensible structure is described to emulate 12
 large-scale scenarios and access external emulation resources.
 
