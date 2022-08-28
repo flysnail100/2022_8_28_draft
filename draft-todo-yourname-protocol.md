@@ -103,6 +103,29 @@ All emulation nodes run real network protocol stacks and applications to complet
 
 ## SDN Switch
 According to assigned network parameters, each emulation node is linked to corresponding SDN switch by the main controller. SDN software switch is responsible for the connection of virtual nodes. Meanwhile SDN hardware switch is in charge of the connection of physical nodes, and provides access to external networks or links for the emulation architecture. SDN software switch and SDN hardware switch are connected with each other to form an interconnected emulation network. Once the emulation experiment starts, the main controller sends real-time flow tables to each SDN switch to simulate the dynamic topology of the target network model. SDN switches can also collect and send their own states back to the Web UI for displaying, or save these states for subsequent analysis.
+
+# Emulation Node Design
+Emulation node is actual carrier of network protocols and communication technologies which is the basic emulation element of the emulation architecture.
+
+## Node Virtualization
+Virtualization is a resource management technology, which realizes the goal of virtualizing a physical computer system into multiple virtual computer systems. Typical virtualization methods include virtual machine and container. This document takes the container-based virtualization, such as Docker, as an example to illustrate the emulation node design. Moreover, container orchestration, such as Kubernetes, could be employed to achieves functions that cannot be supported by native container-based virtualization. A Pod, which is the basic arrangement unit, usually covers multiple containers in Kubernetes. Containers in a Pod share some resources with each other, e.g. storage and network resources.
+
+Figure 3 describes an emulation node which is built by a Pod consists of an emulation container and a capture container. Network protocols or technologies which need to be validated are deployed at the emulation container. The capture container is responsible for real-time network measurement and full packets capture in simulation scenarios. Considering changeable simulation scenarios and different networks, researchers need to set network measurement points as needed. Via binding to each other in the form of Pod and sharing network resources, the capture container can measure and monitor all network information of the emulation container. Thus, the flexible configuration of network measurement on demand is realized.
+
+## Node Parameters
+Each emulation node has corresponding physical parameters which are used to describe real network nodes in simulation scenarios. These parameters cover communication settings, location parameters, and service configurations. The web front-end in the control plane provides interactive interfaces for researchers to set these parameters. Corresponding settings are stored in a database.
+
+The communication settings reflect the communication characteristics of the network node, e.g. effective isotropic radiated power (EIRP), G/T, modulation, communication frequency, and etc. According to the different placements of the network node in SN, the location parameters should be discussed separately. For space-based nodes, the location parameters contain eccentricity, period, inclination, right ascension of the ascending node, argument of perigee, and true anomaly. For terrestrial-based node, the location parameters refer to longitude and latitude. Through communication settings and location parameters, the calculation of connection relationships and link characteristics between nodes could be gained. Service configurations are applied to initialize the function of the emulation node, involving protocols selection, data transmission model, node types selection, and etc.
+
+## Multiple Network Protocols
+Based on different container images, various of emulation containers are created. Typically, these containers could be divided into three types, namely DTN node, TCP/IP node and custom node, as shown in Figure 4. DTN node and TCP/IP node correspond to DTN and TCP/IP network protocol architecture respectively. Furthermore, custom node provides an extension method for new or modified protocol architectures in the proposed architecture. Network protocol implementation softwares, e.g. ION-DTN, Quagga, and etc., and other applications would be deployed among container images in advance to support different requirements of emulation.
+
+# Dynamic Link Design
+
+
+# Network Topology Design
+
+ 
 # Security Considerations
 
 TODO Security
