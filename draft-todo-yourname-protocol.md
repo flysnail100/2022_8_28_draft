@@ -19,11 +19,10 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: "An Architecture for Space Network Emulation"
 category: info
 
-docname: draft-todo-yourname-protocol-latest
+docname: draft-hou-yourname-arch-latest
 submissiontype: IETF  # also: "independent", "IAB", or "IRTF"
 number:
 date:
@@ -45,7 +44,7 @@ venue:
 
 author:
  -
-    fullname: Your Name Here
+    fullname: Dongxu Hou
     organization: Your Organization Here
     email: your.email@example.com
 
