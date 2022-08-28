@@ -166,14 +166,10 @@ Integrating with SDN and traffic control mechanism, the networking can change au
 The platform architecture has extendibility including the horizontal extension of hardware resources and the access of external physical emulation devices. The main controller offers a novel unified control for the connection relationships between emulation nodes under different switches through flow tables. These features allow multiple nodes with huge individual differences to become a part of the proposed platform and to be managed.
  
 # Security Considerations
-
-TODO Security
-
+This document raises no security considerations.
 
 # IANA Considerations
-
 This document has no IANA actions.
-
 
 --- back
 
