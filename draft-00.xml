@@ -69,12 +69,12 @@
     <keyword>Route advertisement</keyword>
     <keyword/>
     <abstract>
-      <t>This document presents a lightweight route information advertisement method in the 
-                satellite constellation. On the one hand, the method selects the advertisement link 
-                by the way of route-associated judgment, to eliminate the unnecessary link and reduce 
-                the overhead or route information announcement. On the other hand, the method provides 
-                a method for dealing with link fault in the route information advertisement process, 
-                to ensure the reliability of routing information advertisement.</t>
+      <t>This document presents a lightweight route information advertisement method in satellite 
+                networks. On the one hand, the method selects the advertisement link by the way of 
+                route-associated judgment, to reduce the overhead of route information advertisement. 
+                On the other hand, the method provides a manner for dealing with link fault during 
+                the route information advertisement process, to ensure the reliability of routing 
+                information advertisement.</t>
     </abstract>
   </front>
   <!-- ***** MIDDLE MATTER ***** -->
@@ -82,39 +82,37 @@
     <middle>
     <section numbered="true" toc="default">
       <name>Introduction</name>
-      <t>The continuous topology change is a main characteristic of the LEO constellation, 
-                which can be divided into the predictable topology change and the unpredictable 
-                topology change. The predictable topology change is caused by the periodic motion 
-                of the satellite, while the unpredictable topology change is caused by sudden 
-                network faults. As the increasing of the constellation scale, the probability 
-                of unpredictable topology changes increases.</t>
-      <t>For the predictable topology change, the snapshot-based routing method divides the 
-                constellation motion period into multiple time slices, and performs routing 
-                calculation based on the topology snapshot of each time slice. Unlike the 
-                predictable topology change, the unpredictable topology change requires the 
-                corresponding protocol mechanism to capture network anomalies and flooding the 
-                route information within a certain range. However, the route information 
-                flooding without constraints would cause significant bandwidth overhead as well 
-                as additional routing convergence delay. Due to the limited on-board resources, 
-                this flooding method is undoubtedly inefficient.</t>
-      <t>The minimum requirement to complete the advertisement of route information within 
-                a certain network topology is to construct a connected graph. Therefore, the 
-                route information only needs to be advertised on the sub-topology of the physical 
-                topology. The sub-topology is constructed by removing partial links from the 
-                physical topology, and has the same node reachability as the original network. The 
-                minimum spanning tree is an available sub-topology. However, the minimum spanning 
-                tree can not be used as a good sub-topology for fault-prone large-scale networks such 
-                as the satellite constellation. Any failed link in these networks would decompose a 
-                tree-like structure into two disjoint sub-topologies, preventing the advertisement 
-                of route information. In addition, with the increasing of the network scale, the 
-                time complexity of the algorithm to construct the sub-topology is furhter increased.</t>
-      <t>Aiming at the above issues, this document provides a route information lightweight 
-                advertisement mechanism in the satellite constellation. On the one hand, the mechanism 
-                selects the route information announcement link by the way of route-associated judgment, 
-                to eliminate the unnecessary link and reduce the overhead or route information 
-                announcement. On the other hand, the mechanism provides a method for dealing with 
-                link fault in the route information announcement process, to ensure the reliability 
-                of route information advertisement.</t>
+      <t>The continuous topology change is a main characteristic of the LEO constellation, which can 
+                be divided into the predictable topology change and the unpredictable topology change. 
+                The predictable topology change is caused by the periodic motion of the satellite, 
+                while the unpredictable topology change is caused by emergencies. With the increasing 
+                scale of satellite networks, the probability of unpredictable topology changes is also 
+                increasing.</t>
+      <t>For the predictable topology change, the snapshot-based routing method divides the satellite 
+                network motion period into multiple time slices, and performs routing calculation based 
+                on time slices. Unlike the predictable topology change, the unpredictable topology 
+                change requires the corresponding protocol mechanism to capture network anomalies and 
+                flooding the route information within a certain range. However, the route information 
+                flooding without constraints would cause significant bandwidth overhead as well as 
+                additional routing convergence delay. Considering the limited on-board resources, the 
+                above method is undoubtedly inefficient.</t>
+      <t>The minimum requirement to complete the route information advertisement within a certain 
+                network topology is to construct a connected graph. Therefore, the route information 
+                only needs to be advertised on the sub-topology of the physical topology. The 
+                sub-topology is constructed by removing some links from the physical topology, and has 
+                the same node reachability as the original network. The minimum spanning tree is an 
+                available sub-topology. However, the minimum spanning tree can not be used as a good 
+                sub-topology for fault-prone large-scale networks such as the LEO mega-constellation. 
+                Any failed link in these networks would decompose a tree-like structure into two disjoint 
+                sub-topologies, and prevent information advertisement. In addition, with the increasing 
+                scale of the network, the time complexity of the algorithm to construct the sub-topology 
+                is furhter increased.</t>
+      <t>Aiming at the above issues, this document provides a lightweight route information advertisement 
+                mechanism in the LEO mega-constellation. On the one hand, the mechanism selects the route 
+                information advertisement link by the way of route-associated judgment to reduce the 
+                overhead of route information advertisement. On the other hand, the mechanism provides a 
+                method for dealing with link fault during the route information advertisement process, to 
+                ensure the reliability of routing information advertisement.</t>
     </section>
     <section numbered="true" toc="default">
       <name>Requirements Language</name>
@@ -143,23 +141,22 @@
     </section>
     <section numbered="true" toc="default">
       <name>Basic Network Structure</name>
-      <t>In the satellite network, each satellite moves along the orbit, which can be divided 
+      <t>In the LEO mega-constellation, each satellite moves along the orbit, which can be divided 
                 into circular orbit satellites and elliptical orbit satellites. Different orbits 
                 can be described by Keplerian parameters. At present, the mainstream of satellite 
                 networks basically adopt circular orbit.</t>
-      <t>When links between satellites are established for end-to-end communication, each 
-                satellite usually has a fixed number of links which communicate with neighboring 
-                nodes, and considering the cost of satellite links and power restrictions of 
-                satellites, satellite links are generally limited to direct connections between 
-                adjacent nodes. In a single-layer satellite constellation, each satellite may have 
-                four types of contiguous neighbour satellites and each type refers to a direction. 
-                The number of neighbor satellites distributed in one direction is determined by 
-                the number of antennas deployed on the satellite for communication. If the satellite 
-                contains a single antenna in each direction, the connection relationship between 
-                the satellite Node E and its two satellites in the same orbit and two satellites in 
-                different adjacent orbits is shown in Figure 1. In a multi-tier satellite constellation, 
-                each satellite may have two additional types of adjacent satellites, upper level 
-                satellites and lower level satellites in different tiers.</t>
+      <t>When links between satellites are established for end-to-end communication, each satellite 
+                usually has a fixed number of links which communicate with neighboring nodes, and 
+                considering the cost of satellite links and power restrictions of satellites, satellite 
+                links are generally limited to direct connections between adjacent nodes. In a single-layer 
+                satellite constellation, each satellite has four types of contiguous neighbour satellites 
+                and each type refers to a direction. The number of neighbor satellites distributed in 
+                one direction is determined by the number of antennas deployed on the satellite for 
+                communication. As shown in Figure 1, if the satellite contains a single antenna in each 
+                direction, the satellite Node E has two links in the same orbit and two links in different 
+                adjacent orbits with other satellites. In a multi-tier satellite constellation, each 
+                satellite MAY have two additional types of adjacent satellites, upper level satellites 
+                and lower level satellites in different tiers.</t>
       <figure>
         <name>Node E and its adjacent satellites</name>
         <artwork align="center" name="" type="" alt=""><![CDATA[ 
@@ -180,34 +177,30 @@
      |         |         |   
 	                   ]]></artwork>
       </figure>
-      <t>The link delay is the main factor that affects the advertisement efficiency of 
-                route information. The longer the inter-satellite distance is, the longer the 
-                delay of route information propagation is. The propagation delay is related to 
-                the accumulated delay of upstream links and the link delay in the basic network 
-                structure. Figure 1 shows the basic network topology which is managed by Node E, 
-                including 8 surrounding nodes of Node E and links connecting these nodes. Since 
-                the satellite moves regularly along the orbit, each node can maintain the 
-                propagation delay of edges in the basic structure based on its own position and 
-                orbit parameters. The propagation delay of the edge can be marked as W, e.g. W_AB. 
-                Based on the accumulated delay of upstream links and the link delay in the basic 
-                network structure, each node can realize the route-associated judgment of information 
-                advertisement. It should be noted that the basic structure in the real network 
-                is not presented as a simple rectangle or square for the different distances 
-                between nodes and the dynamic change of geograhical location.</t>
+      <t>The link delay is the main factor that affects the advertisement efficiency. The longer the 
+                inter-satellite distance is, the longer the advertisement propagation delay is. The 
+                propagation delay is related to the accumulated delay of upstream links and the link 
+                delay in the basic network structure. Figure 1 shows the basic network topology which 
+                is managed by Node E, including 8 surrounding nodes of Node E and links connecting these 
+                nodes. Since the satellite moves regularly along the orbit, each node can maintain the 
+                propagation delay of edges in the basic structure based on its own position and orbit 
+                parameters. The propagation delay of the edge can be marked as W, e.g. W_AB. Based on 
+                the accumulated delay of upstream links and the link delay in the basic network structure, 
+                each node can realize the route-associated judgment of information advertisement. It 
+                SHOULD be noted that the basic structure in the real network is not presented as a 
+                simple rectangle or square for the variation distances between nodes.</t>
     </section>
     <section numbered="true" toc="default">
-      <name>Route-associated Judgment Method</name>
-      <t>As shown in Figure 2, in the basic network structure of the satellite constellation, 
-                Node E has four links connected to the neighbor nodes. If the routing 
+      <name>Route-associated Judgment</name>
+      <t>As shown in Figure 1, Node E has four links connected to the neighbor nodes. If the routing 
                 information is announced from one of these four links, Node E judges whether to 
                 advertise the route information to other neighbors based on the accumulated link 
-                delay and the link delay in the basic network structure. The route information is 
-                classified into the horizontal direction advertisement and the vertical direction 
-                advertisement. According to the receiving direction of the route information, the 
-                route information is divided into the fault related link advertisements and the 
-                non-fault related link advertisements. Based on whether the route information 
-                is from a fault-related link, the fault occurs in different links can be divided 
-                into horizontal link fault and orbit surface link fault. </t>
+                delay and the link delay in the basic network structure. The route information advertisement 
+                is classified into the horizontal direction advertisement and the vertical direction 
+                advertisement. According to the receiving direction of the route information, the information 
+                advertisement is divided into the fault related advertisements and the non-fault related 
+                advertisements. The fault occurs in different network locations can be divided into the 
+                horizontal direction network fault and the vertical direction network fault. </t>
       <figure>
         <name>Horizontal direction network fault</name>
         <artwork align="center" name="" type="" alt=""><![CDATA[ 
@@ -262,21 +255,20 @@
     Left Part    |    Right Part
 	                   ]]></artwork>
       </figure>
-      <t>According to different fault types, the notification manner at the route information 
-                source node should be classified and discussed. For a link fault in the horizontal 
+      <t>According to different fault types, the route information advertisement manner at the 
+                source node SHOULD be classified and discussed. For a network fault in the horizontal 
                 direction, the whole network topology is divided into a left part and a right part 
-                by the orbit plane where the source node of the failed link is located. The source 
-                node advertises information from the links except the failed link, and all routing 
-                information is not advertised across the left part and the right part.</t>
-      <t>For the link fault in the vertical direction, the network topology is divided into 
-                the left part and the right part by the orbit plane where the source node of the 
-                failed link is located and the orbit plane where its neighbor on the same side is 
-                located.The source node advertises route information from links other than the 
-                failed link. It should be noted that except for the first hop advertisement in the 
-                horizontal direction, the route information is not advertised across the left or right 
-                part. As shown in Figure 3, Node C and Node D are the right neighbors of the source 
-                nodes A and B of the failed link. And the network topology is divide into a left 
-                part and a right part by the orbit planes of Node C, D, A, B.</t>
+                by the vertical plane of the failed link as shown in Figure 2. The source node advertises 
+                information from links except the failed link, and all route information is not advertised 
+                across the left part and the right part.</t>
+      <t>For a network fault in the vertical direction, the network topology is divided into 
+                the left part and the right part by two adjacent orbit plane where source nodes and 
+                corresponding neighbor nodes is located. The source node advertises information from 
+                links except the failed link. It SHOULD be noted that except for the first hop advertisement 
+                in the horizontal direction, the route information is not advertised across the left 
+                or right part. As shown in Figure 3, Node C and Node D are the right neighbors of the source 
+                nodes A and B of the failed link. And the network topology is divide into a left part and 
+                a right part by the orbit planes of Node C, D, A, B.</t>
       <t>1) Route Information From the Horizontal Direction</t>
       <figure>
         <name>Route information from the horizontal direction</name>
@@ -299,12 +291,12 @@
 	                   ]]></artwork>
       </figure>
       <t>When the route information is advertised from the horizontal direction, the upstream 
-                node should inform the advertised node of the accumulated link delays of itself and 
+                node SHOULD inform the advertised node of the accumulated link delays of itself and 
                 its adjacent nodes at the same orbit. After receiving the route information and the 
                 accumulated link delays, the advertised node judges whether to advertise the route 
                 information to the downstream node according to the network information maintained 
-                by itself. As shown in Figure 4, the advertised node advertises to the downstream 
-                node in the horizontal direction by default.</t>
+                by itself. As shown in Figure 4, the advertised node informs the downstream 
+                node in the horizontal direction by default. The basic process is as follows:</t>
       <t>Step 1: The route information and the accumulated link delays are advertised to Node 
                 E by Node F. The accumulated link delays refer to the delays when the routing 
                 information reaches Node C, F, and I, which are marked as Sum_C, Sum_F, and Sum_I.</t>
@@ -324,7 +316,8 @@
                 vertical direction by default, and informs the advertised node the accumulated link 
                 delay of itself. After receiving the route information and the accumulated link delay, 
                 the advertised node continues to advertise to the downstream node in the horizontal 
-                direction by default. As shown in Figure 5, Node K is a node on the fault related link.</t>
+                direction by default. As shown in Figure 5, Node K is a node at the fault related link. 
+                The basic process is as follows:</t>
       <figure>
         <name>Fault related link scenario</name>
         <artwork align="center" name="" type="" alt=""><![CDATA[ 
@@ -359,13 +352,12 @@
       <t>As mentioned earlier, the route information is not advertised across the left part and 
                 right part. When the route information is advertised from the vertical direction link 
                 which is a fault related link, the route information would only be advertised to the 
-                neighbor nodes on one side in the horizontal direction. There is no need to limit the 
-                notified side, and the notified side may be unified in advance when performing the 
+                neighbor nodes at one side in the horizontal direction. There is no need to limit the 
+                notified side, and the notified side MAY be unified in advance when performing the 
                 associated judgement of the route information advertisement. As shown in Figure 6, if 
                 Node G advertises routing information to Node F, it would not advertise to Node H. 
                 Except for special cases, when a link fault occurs in the vertical direction link, the 
-                route information source node will advertise to the neighbor nodes on both sides in 
-                the horizontal direction.</t>
+                source node will advertise to the neighbor nodes on both sides in the horizontal direction.</t>
       <t>(2) Non-fault Related Link Scenario</t>
       <figure>
         <name>Non-fault related link scenario</name>
@@ -398,7 +390,7 @@
                 not be announced to the downstream node. Meanwhile, the route information announced by 
                 the non-fault related link along the vertical direction will not be announced along the 
                 horizontal direction. As shown in Figure 6, Node D, H, and L advertise route information 
-                as upstream nodes.</t>
+                as upstream nodes. The basic process is as follows:</t>
       <t>Step 1: After receiving the route information from Node D, Node C judges based on the 
                 process described in 1) and advertises the route information to Node G and Node B. 
                 Meanwhile, Node H advertises to Node G by default.</t>
@@ -428,12 +420,12 @@
                 I.</t>
     </section>
     <section numbered="true" toc="default">
-      <name>Error Handling Method</name>
+      <name>Error Handling</name>
       <t>The above method can ensure the synchronization of the route information among the nodes 
                 in the certain network range. However, the single point fault would cause the synchronization 
                 error of route information during the advertisement process. There are two types of single 
                 point fault, including the horizontal fault and the vertical fault. In this section, the 
-                fault handling method is discussed. It should be noted that if a link affected by a single 
+                fault handling method is discussed. It SHOULD be noted that if a link affected by a single 
                 point fault is not the link selected by the route-associated judgment, the route information 
                 advertisement process is not affected by the single point fault, as shown in Figure 7. </t>
       <figure>
@@ -495,7 +487,8 @@
       <t>(1) Fault Related Link Scenario</t>
       <t>In the fault related link scenario, the route information advertised from the upstream node 
                 would bypass to one side at the fault point and reach the adjacent orbit. The advertisement 
-                process would be restarted at the adjacent orbit, as shown in Figure 9.</t>
+                process would be restarted at the adjacent orbit, as shown in Figure 9. The basic process is as 
+                follows:</t>
       <figure>
         <name>Fault related link scenario</name>
         <artwork align="center" name="" type="" alt=""><![CDATA[ 
@@ -558,14 +551,14 @@
                 detour process of the route information advertisement.</t>
     </section>
     <section numbered="true" toc="default">
-      <name>Use Cases</name>
+      <name>Route Information Advertisement</name>
       <t>As shown in Figure 11, a fault occurs in the link between A1 and A2 at a certain time. The network 
-                topology is divided into the left part and the right part by the vertical line of the fault 
+                topology is divided into the left part and the right part by the vertical plane of the fault 
                 link. For the left part, starting from the link fault point A2, the route information is 
                 advertised to the neighbor nodes in the three direction of up(B2), down(E2), and left(A3). 
                 The specific process is as follows:</t>
       <figure>
-        <name>Use case scenario</name>
+        <name>Route information advertisement</name>
         <artwork align="center" name="" type="" alt=""><![CDATA[ 
  Boundary                                        Boundary
  | ^           ^        ^           ^        ^       |
@@ -611,9 +604,9 @@
       <t>Step 2: After receiving the route information, A3 needs to determine whether to announce 
                 the route information to B3, A4, and E3.</t>
       <t>If Sum_A2+W_A2A3+W_A3B3 is less than Sum_B2+W_B2B3, A3 advertises the route information to B3, 
-                otherwise, no advertisement is required.</t>
+                otherwise, no advertisement is REQUIRED.</t>
       <t>If Sum_A2+W_A2A3+W_A3E3 is less than Sum_E2+W_E2E3, A3 advertises the route information to E3, 
-                otherwise, no advertisement is required.</t>
+                otherwise, no advertisement is REQUIRED.</t>
       <t>By default, A3 informs A4 of the route information and the accumulated link delays which include 
                 Sum_B3, Sum_E3, and Sum_A3. In combination with its own position and orbit parameters, A3 
                 regularly maintains the network information in the basic structure. The accumulated link 
@@ -657,15 +650,13 @@
                 which is not described here.</t>
     </section>
     <section numbered="true" toc="default">
-      <name>Conclusion and Future Works</name>
+      <name>Future Works</name>
       <t>In this document, the method of route information advertisement in the LEO mega-constellation is 
-                discussed. This method not only reduce the link state information maintenance and routing 
-                calculation cost, but also improve the routing stability and convergence speed. It should be 
-                noted that the satellite network is just one of the application scenarios. The inter-satellite 
-                network constructs a mesh topology. For other scenarios which have the same network topology, 
-                this method also could be used. In the future work, the extension of the current routing protocol 
-                to support the method of route information advertisement described in this document would be 
-                taken in mind.</t>
+                discussed. It SHOULD be noted that the satellite network is one of the application scenarios. 
+                The LEO mega-constellation network constructs a mesh topology. For other scenarios which have 
+                the same network topology property, this method also could be applied.</t>
+      <t>In the future work, the extension of the current routing protocol to support the method of route 
+                information advertisement described in this document would be taken in mind.</t>
     </section>
     <section numbered="true" toc="default">
       <name>Security Considerations</name>
